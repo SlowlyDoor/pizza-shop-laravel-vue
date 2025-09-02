@@ -1,6 +1,7 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import { useCartStore } from './stores/cart';
 import router from './router';
 import App from './App.vue';
 
