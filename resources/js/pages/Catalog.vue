@@ -13,11 +13,11 @@
 
         <div class="controls">
           <input 
-            type="number" 
+            v-imask-int
+            type="text" 
             class="qty" 
             v-model.number="qtyMap[p.id]" 
-            min="1" 
-            max="99" 
+            inputmode="numeric"
             :class="{error: !validQty(qtyMap[p.id])}" 
             placeholder="1"
           >
@@ -36,6 +36,7 @@
   import axios from 'axios';
   import { ref, reactive, onMounted } from 'vue';
   import { useCartStore } from '../stores/cart';
+  import IMask from 'imask';
 
   const pizzas = ref([]);
   const qtyMap = reactive({});
@@ -68,4 +69,20 @@
       maximumFractionDigits: 0,
     });
   }
+
+  const vImaskInt = {
+    mounted(el) {
+      el._mask = IMask(el, {
+          mask: Number,
+          min: 1,
+          max: 99,
+          scale: 0,
+          radix: ',',
+          thousandsSeparator: ''
+      });
+    },
+    unmounted(el) {
+      el._mask?.destroy?.();
+    },
+  };
 </script>

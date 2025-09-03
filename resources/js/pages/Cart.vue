@@ -24,11 +24,12 @@
         </div>
 
         <input 
-          type="number" 
+          v-imask-int
+          type="text" 
           class="qty"  
           v-model.number="qtyLocal[it.id]" 
-          min="1" 
-          max="99" 
+          inputmode="numeric"
+          :class="{ error: !validQty(qtyLocal[it.id]) }"
           @input="applyQty(it.id)"
         >
         <button class="icon-btn" title="Удалить" @click="cart.remove(it.id)">Удаление</button>
@@ -52,6 +53,7 @@
 <script setup>
   import { reactive, watchEffect } from 'vue';
   import { useCartStore } from '../stores/cart';
+  import IMask from 'imask';
 
   const cart = useCartStore();
   const qtyLocal = reactive({});
@@ -80,5 +82,24 @@
       maximumFractionDigits: 0,
     });
   }
+  function validQty(v) {
+    const n = Number(v);
+    return Number.isInteger(n) && n >= 1 && n <= 99;
+  }
+  const vImaskInt = {
+    mounted(el) {
+      el._mask = IMask(el, {
+          mask: Number,
+          min: 1,
+          max: 99,
+          scale: 0,
+          radix: ',',
+          thousandsSeparator: ''
+      });
+    },
+    unmounted(el) {
+      el._mask?.destroy?.();
+    },
+  };
 </script>
 
