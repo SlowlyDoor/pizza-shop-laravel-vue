@@ -49,4 +49,11 @@
   </section>
 </template>
 
-<script setup src="./scripts/cart.js"></script>
+<script setup>
+  imoprt { useCartPage } from './scripts/cart';
+  const {
+    cart,
+    qtyLocal,
+    fmtMoney
+  } = useCartPage();
+</script>
