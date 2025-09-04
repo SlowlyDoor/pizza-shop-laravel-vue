@@ -21,19 +21,3 @@ function addToCart(p) {
   if (!validQty(q)) return;
   cart.add(p, q);
 }
-
-const vImaskInt = {
-  mounted(el) {
-    el._mask = IMask(el, {
-        mask: Number,
-        min: 1,
-        max: 99,
-        scale: 0,
-        radix: ',',
-        thousandsSeparator: ''
-    });
-  },
-  unmounted(el) {
-    el._mask?.destroy?.();
-  },
-};
