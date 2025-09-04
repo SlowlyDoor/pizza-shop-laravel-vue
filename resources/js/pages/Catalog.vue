@@ -32,4 +32,13 @@
   </section>
 </template>
 
-<script setup src="./scripts/catalog.js"></script>
+<script setup>
+  import { useCatalog } from './scripts/catalog';
+  const {
+    pizzas,
+    qtyMap,
+    addToCart,
+    isValidQty,
+    fmtMoney
+  } = useCatalog();
+</script>
