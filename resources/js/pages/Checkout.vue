@@ -36,8 +36,8 @@
             type="text" 
             class="input" 
             v-mask-phone
-            v-model="phone" 
-            :class="{ error: phone && !validPhone }" 
+            v-model.lazy="phone" 
+            :class="{ error: phone && !validPhone }"
             placeholder="+7 (___) ___-__-__"
         >
       </label>
@@ -70,73 +70,4 @@
 </template>
 
 
-<script setup>
-  import axios from 'axios';
-  import {ref, computed } from 'vue';
-  import { useCartStore } from '../stores/cart';
-  import IMask from 'imask';
-
-  const cart = useCartStore();
-
-  axios.defaults
-      .headers
-      .common['Accept'] = 'application/json';
-
-  const full_name = ref('');
-  const address = ref('');
-  const phone = ref('');
-  const comment = ref('');
-
-  const ok = ref(null);
-  const error = ref('');
-
-  const reName = /^[А-Яа-яЁё -]+$/u;
-  const reAddress = /^[0-9А-Яа-яЁё\s.,;:()\/-]+$/u;
-  const rePhone = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
-
-  const validName = computed(() => full_name.value.length >= 3 && full_name.value.length <= 100 && reName.test(full_name.value));
-  const validAddress = computed(() => address.value.length >= 5 && address.value.length <= 200 && reAddress.test(address.value));
-  const validPhone = computed(() => rePhone.test(phone.value));
-
-  const formValid = computed(() => cart.items.length > 0 && validName.value && validAddress.value && validPhone.value);
-
-  async function submit() {
-    error.value = '';
-    ok.value = null;
-    if (!formValid.value) return;
-
-    try {
-      const payload = {
-        full_name: full_name.value,
-        address: address.value,
-        phone: phone.value,
-        comment: comment.value || null,
-        items: cart.toOrderItems(),
-      };
-
-      const { data } = await axios.post('api/orders', payload);
-      ok.value = data;
-      cart.clear();
-    } catch (exception) {
-      if (exception.response?.status === 422) {
-        error.value = Object.values(e.response.data.errors || {})
-            .flat()
-            .join(' ');
-      } else {
-        error.value = "Не удалось оформить заказ. Попробуйте ещё раз.";
-      }
-    }
-  }
-  function fmt(x) {
-    return Number(x).toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 });
-  }
-
-  const vMaskPhone = {
-    mounted(el) {
-      el._mask = IMask(el, { mask: '+{7} (000) 000-00-00' });
-    },
-    unmounted(el) {
-      el._mask?.destroy?.();
-    },
-  };
-</script>
+<script setup src="./scripts/checkout.js"></script>

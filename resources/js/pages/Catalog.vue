@@ -16,9 +16,9 @@
             v-imask-int
             type="text" 
             class="qty" 
-            v-model.number="qtyMap[p.id]" 
+            v-model.lazy="qtyMap[p.id]" 
             inputmode="numeric"
-            :class="{error: !validQty(qtyMap[p.id])}" 
+            :class="{ error: !validQty(qtyMap[p.id]) }" 
             placeholder="1"
           >
           <button 
@@ -32,57 +32,4 @@
   </section>
 </template>
 
-<script setup>
-  import axios from 'axios';
-  import { ref, reactive, onMounted } from 'vue';
-  import { useCartStore } from '../stores/cart';
-  import IMask from 'imask';
-
-  const pizzas = ref([]);
-  const qtyMap = reactive({});
-  const cart = useCartStore();
-
-  onMounted(async () => {
-    axios.defaults
-        .headers
-        .common['Accept'] = 'application/json';
-    const { data } = await axios.get('/api/pizzas');
-    pizzas.value = data;
-    data.forEach((p) => (qtyMap[p.id] = qtyMap[p.id] ?? 1));
-  });
-
-  function addToCart(p) {
-    const q = Number(qtyMap[p.id] || 1);
-    if (!validQty(q)) return;
-    cart.add(p, q);
-  }
-
-  function validQty(v) {
-    const n = Number(v);
-    return Number.isInteger(n) && n >= 1 && n <= 99;
-  }
-
-  function fmt(x) {
-    return Number(x).toLocaleString('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      maximumFractionDigits: 0,
-    });
-  }
-
-  const vImaskInt = {
-    mounted(el) {
-      el._mask = IMask(el, {
-          mask: Number,
-          min: 1,
-          max: 99,
-          scale: 0,
-          radix: ',',
-          thousandsSeparator: ''
-      });
-    },
-    unmounted(el) {
-      el._mask?.destroy?.();
-    },
-  };
-</script>
+<script setup src="./scripts/catalog.js"></script>

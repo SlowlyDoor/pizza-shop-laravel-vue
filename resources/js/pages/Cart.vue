@@ -27,10 +27,9 @@
           v-imask-int
           type="text" 
           class="qty"  
-          v-model.number="qtyLocal[it.id]" 
+          v-model.lazy="qtyLocal[it.id]" 
           inputmode="numeric"
           :class="{ error: !validQty(qtyLocal[it.id]) }"
-          @input="applyQty(it.id)"
         >
         <button class="icon-btn" title="Удалить" @click="cart.remove(it.id)">Удаление</button>
       </div>
@@ -50,56 +49,4 @@
   </section>
 </template>
 
-<script setup>
-  import { reactive, watchEffect } from 'vue';
-  import { useCartStore } from '../stores/cart';
-  import IMask from 'imask';
-
-  const cart = useCartStore();
-  const qtyLocal = reactive({});
-
-  watchEffect(() => {
-    cart.items
-        .forEach((it) => {
-            if (qtyLocal[it.id] == null) qtyLocal[it.id] = it.qty;
-        });
-  });
-
-  function applyQty(id) {
-    const q = Number(qtyLocal[id]);
-    if (Number.isInteger(q) && q >= 1 && q <= 99) {
-      cart.setQty(id, q);
-    } else {
-      qtyLocal[id] = cart.items
-          .find((i) => i.id === id)?.qty ?? 1;
-    }
-  }
-
-  function fmt(x) {
-    return Number(x).toLocaleString('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      maximumFractionDigits: 0,
-    });
-  }
-  function validQty(v) {
-    const n = Number(v);
-    return Number.isInteger(n) && n >= 1 && n <= 99;
-  }
-  const vImaskInt = {
-    mounted(el) {
-      el._mask = IMask(el, {
-          mask: Number,
-          min: 1,
-          max: 99,
-          scale: 0,
-          radix: ',',
-          thousandsSeparator: ''
-      });
-    },
-    unmounted(el) {
-      el._mask?.destroy?.();
-    },
-  };
-</script>
-
+<script setup src="./scripts/cart.js"></script>
