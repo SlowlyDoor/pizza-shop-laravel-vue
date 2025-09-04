@@ -18,7 +18,7 @@
           <div class="line">
             Стоимость позиции:
             <strong>
-              {{ fmt(it.qty * it.price)}}
+              {{ fmtMoney(it.qty * it.price)}}
             </strong>
           </div>
         </div>
@@ -36,7 +36,7 @@
       <div class="summary card">
         <div>
           Итого: 
-          <strong>{{ fmt(cart.totalPrice) }}</strong>
+          <strong>{{ fmtMoney(cart.totalPrice) }}</strong>
         </div>
         
         <div class="actions">
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-  imoprt { useCartPage } from './scripts/cart';
+  import { useCartPage } from './scripts/cart';
   const {
     cart,
     qtyLocal,

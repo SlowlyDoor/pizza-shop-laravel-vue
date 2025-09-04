@@ -8,7 +8,7 @@
         <h3 class="name">{{ p.name }}</h3>
         <p class="desc">{{ p.description }}</p>
         <p class="price">
-          <strong>{{ fmt(p.price) }}</strong>
+          <strong>{{ fmtMoney(p.price) }}</strong>
         </p>
 
         <div class="controls">
