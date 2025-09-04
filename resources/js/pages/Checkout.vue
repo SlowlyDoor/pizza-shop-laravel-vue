@@ -70,4 +70,21 @@
 </template>
 
 
-<script setup src="./scripts/checkout.js"></script>
+<script setup>
+  import { useCheckout } from './scripts/checkout';
+  const {
+    cart,
+    full_name,
+    address,
+    phone,
+    comment,
+    ok,
+    error,
+    validName,
+    validAddress,
+    validPhone,
+    formValid,
+    submit,
+    fmtMoney
+  } = useCheckout();
+</script>
