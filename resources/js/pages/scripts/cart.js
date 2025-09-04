@@ -1,6 +1,7 @@
 import { reactive, watchEffect } from 'vue';
 import { useCartStore } from '../../stores/cart';
 import { fmtMoney } from '../../utils/money';
+import { isValidQty } from '../../utils/validators';
 
 export function useCartPage() {
   const cart = useCartStore();
@@ -16,6 +17,7 @@ export function useCartPage() {
   return {
     cart,
     qtyLocal,
-    fmtMoney
+    fmtMoney,
+    isValidQty
   };
 }

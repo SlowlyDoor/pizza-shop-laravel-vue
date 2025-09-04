@@ -20,7 +20,7 @@ export function useCatalog() {
 
   function addToCart(p) {
     const q = Number(qtyMap[p.id] || 1);
-    if (!validQty(q)) return;
+    if (!isValidQty(q)) return;
     cart.add(p, q);
   }
 

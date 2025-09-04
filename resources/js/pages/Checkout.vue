@@ -54,7 +54,7 @@
 
       <div class="total">
         Итого:
-        <strong>{{ fmt(cart.totalPrice) }}</strong>
+        <strong>{{ fmtMoney(cart.totalPrice) }}</strong>
       </div>
 
       <div class="actions">

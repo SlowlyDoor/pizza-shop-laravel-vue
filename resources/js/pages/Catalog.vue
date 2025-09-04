@@ -18,12 +18,12 @@
             class="qty" 
             v-model.lazy="qtyMap[p.id]" 
             inputmode="numeric"
-            :class="{ error: !validQty(qtyMap[p.id]) }" 
+            :class="{ error: !isValidQty(qtyMap[p.id]) }" 
             placeholder="1"
           >
           <button 
             class="btn" 
-            :disabled="!validQty(qtyMap[p.id])" 
+            :disabled="!isValidQty(qtyMap[p.id])" 
             @click="addToCart(p)"
           >В корзину</button>
         </div>

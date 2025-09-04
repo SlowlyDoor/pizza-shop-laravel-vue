@@ -14,7 +14,7 @@ function makeNumberMask(el, {min = 1, max = 99} = {}) {
 
 export default {
 	install(app) {
-		app.derective('imask-int', {
+		app.directive('imask-int', {
 			mounted(el, binding) { makeNumberMask(el, binding?.value); },
 			unmounted: destroyMask,
 		});

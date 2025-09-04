@@ -29,7 +29,7 @@
           class="qty"  
           v-model.lazy="qtyLocal[it.id]" 
           inputmode="numeric"
-          :class="{ error: !validQty(qtyLocal[it.id]) }"
+          :class="{ error: !isValidQty(qtyLocal[it.id]) }"
         >
         <button class="icon-btn" title="Удалить" @click="cart.remove(it.id)">Удаление</button>
       </div>
@@ -54,6 +54,7 @@
   const {
     cart,
     qtyLocal,
-    fmtMoney
+    fmtMoney,
+    isValidQty
   } = useCartPage();
 </script>
