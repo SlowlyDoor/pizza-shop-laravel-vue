@@ -6,4 +6,3 @@ use App\Http\Controllers\Api\OrderController;
 
 Route::get('/pizzas', [PizzaController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
-Route::post('/ping', fn() => response()->json(['ok' => true]));
