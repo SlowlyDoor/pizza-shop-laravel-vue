@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { ref, reactive, onMounted } from 'vue';
-import { useCartStore } from '../../stores/cart';
-import { fmtMoney } from '../../utils/money';
-import { isValidQty } from '../../utils/validators';
+import axios from "axios";
+import { ref, reactive, onMounted } from "vue";
+import { useCartStore } from "../../stores/cart";
+import { fmtMoney } from "../../utils/money";
+import { isValidQty } from "../../utils/validators";
 
 export function useCatalog() {
   const pizzas = ref([]);
@@ -10,10 +10,8 @@ export function useCatalog() {
   const cart = useCartStore();
 
   onMounted(async () => {
-    axios.defaults
-        .headers
-        .common['Accept'] = 'application/json';
-    const { data } = await axios.get('/api/pizzas');
+    axios.defaults.headers.common["Accept"] = "application/json";
+    const { data } = await axios.get("/api/pizzas");
     pizzas.value = data;
     data.forEach((p) => (qtyMap[p.id] = qtyMap[p.id] ?? 1));
   });
@@ -30,6 +28,6 @@ export function useCatalog() {
     cart,
     addToCart,
     isValidQty,
-    fmtMoney
+    fmtMoney,
   };
 }

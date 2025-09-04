@@ -1,0 +1,50 @@
+.row {
+	display: grid;
+	grid-template-columns: 96px 1fr auto;
+	gap: 14px;
+	align-items: center;
+	margin-bottom: 12px;
+}
+.row .thumb {
+	width: 96px; 
+	height: 96px; 
+	object-fit: cover; 
+	border-radius: 10px; 
+	background: #f2f4f8;
+}
+
+.info .name { 
+	font-weight: 700; 
+	margin-bottom: 6px; 
+}
+.info .line { 
+	color: var(--text-soft); 
+	font-size: 14px; 
+	margin: 4px 0 10px; 
+}
+
+.qty { 
+	width: 84px; 
+	text-align: center; 
+}
+.icon-btn { 
+	padding: 8px 10px; 
+}
+
+.summary.card {
+	margin-top: 14px;
+	display: flex; 
+	align-items: center; 
+	justify-content: space-between;
+	gap: 16px; 
+	padding: 16px 18px;
+}
+.actions { 
+	display: flex; 
+	gap: 10px; 
+	flex-wrap: wrap; 
+}
+.empty { 
+	color: var(--text-soft); 
+	padding: 16px; 
+}

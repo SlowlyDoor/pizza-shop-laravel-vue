@@ -42,3 +42,5 @@
     fmtMoney
   } = useCatalog();
 </script>
+
+<style src="./styles/catalog.css" scoped></style>

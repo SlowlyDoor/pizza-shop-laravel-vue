@@ -27,11 +27,12 @@
           v-imask-int
           type="text" 
           class="qty"  
-          v-model.lazy="qtyLocal[it.id]" 
+          v-model="qtyLocal[it.id]" 
           inputmode="numeric"
           :class="{ error: !isValidQty(qtyLocal[it.id]) }"
+          @input="applyQty(it.id)"
         >
-        <button class="icon-btn" title="Удалить" @click="cart.remove(it.id)">Удаление</button>
+        <button class="btn btn--danger btn--sm" title="Удалить" @click="cart.remove(it.id)">Удалить</button>
       </div>
       <div class="summary card">
         <div>
@@ -55,6 +56,9 @@
     cart,
     qtyLocal,
     fmtMoney,
-    isValidQty
+    isValidQty,
+    applyQty
   } = useCartPage();
 </script>
+
+<style src="./styles/cart.css" scoped></style>

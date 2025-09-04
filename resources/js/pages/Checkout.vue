@@ -88,3 +88,5 @@
     fmtMoney
   } = useCheckout();
 </script>
+
+<style src="./styles/checkout.css" scoped></style>

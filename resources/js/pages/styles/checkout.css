@@ -1,0 +1,31 @@
+.form { 
+	display: grid; gap: 12px; 
+}
+
+.field { 
+	display: grid; gap: 6px; 
+}
+.label { 
+	font-weight: 600; 
+}
+
+.textarea { 
+	resize: vertical; 
+	min-height: 96px; 
+}
+
+.total {
+	margin: 6px 0 2px;
+	font-size: 18px; 
+	font-weight: 700;
+}
+.actions { 
+	display: flex; 
+	gap: 10px; 
+	flex-wrap: wrap; 
+}
+
+.error-text, 
+.success-text { 
+	font-weight: 600; 
+}
