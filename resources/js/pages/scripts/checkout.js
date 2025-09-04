@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ref, computed } from 'vue';
-import { useCartStore } from '../stores/cart';
+import { useCartStore } from '../../stores/cart';
 import { fmtMoney } from '../../utils/money';
 import { isValidName, isValidAddress, isValidPhone } from '../../utils/validators';
 

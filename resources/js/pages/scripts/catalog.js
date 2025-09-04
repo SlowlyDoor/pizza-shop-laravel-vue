@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ref, reactive, onMounted } from 'vue';
-import { useCartStore } from '../stores/cart';
+import { useCartStore } from '../../stores/cart';
 import { fmtMoney } from '../../utils/money';
 import { isValidQty } from '../../utils/validators';
 

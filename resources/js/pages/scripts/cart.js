@@ -1,5 +1,5 @@
 import { reactive, watchEffect } from 'vue';
-import { useCartStore } from '../stores/cart';
+import { useCartStore } from '../../stores/cart';
 import { fmtMoney } from '../../utils/money';
 
 export function useCartPage() {
